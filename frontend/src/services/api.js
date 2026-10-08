@@ -21,6 +21,26 @@ export async function runDemoScan() {
   return await res.json();
 }
 
+export async function fetchDemoFiles() {
+  const res = await fetch(`${API_BASE}/demo/files`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to fetch demo files');
+  }
+  return await res.json();
+}
+
+export async function fetchBaselineScan() {
+  const res = await fetch(`${API_BASE}/demo/baseline`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.detail || 'Failed to fetch baseline scan');
+  }
+  return await res.json();
+}
+
+
+
 export async function runScanWithPayload({ specText, trafficList }) {
   const res = await fetch(`${API_BASE}/scan`, {
     method: 'POST',

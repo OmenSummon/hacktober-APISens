@@ -97,7 +97,15 @@ export default function EndpointInventory({ inventory }) {
                   <td className="cell-method" style={{ color: item.method === 'GET' ? '#38bdf8' : item.method === 'POST' ? '#34d399' : '#f59e0b' }}>
                     {item.method}
                   </td>
-                  <td className="cell-endpoint">{item.endpoint}</td>
+                  <td className="cell-endpoint">
+                    {item.endpoint}
+                    {item.is_latest && (
+                      <span className="badge-latest" style={{ marginLeft: '8px' }}>
+                        ✨ LATEST
+                      </span>
+                    )}
+                  </td>
+
                   <td style={{ textAlign: 'center' }}>
                     {item.documented ? (
                       <span style={{ color: '#34d399', fontWeight: 'bold' }}>YES</span>
