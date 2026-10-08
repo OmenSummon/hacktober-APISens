@@ -96,6 +96,9 @@ export default function MainFindingPanel({ findings, onSelectAI }) {
             >
               <div className="finding-top">
                 <div className="finding-badges">
+                  {item.is_latest && (
+                    <span className="badge-latest">✨ LATEST</span>
+                  )}
                   <span className={`risk-badge risk-${item.severity}`}>
                     {item.severity}
                   </span>
@@ -103,6 +106,7 @@ export default function MainFindingPanel({ findings, onSelectAI }) {
                   <span className="badge badge-method">{item.method}</span>
                   <span className="endpoint-tag">{item.path}</span>
                 </div>
+
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>

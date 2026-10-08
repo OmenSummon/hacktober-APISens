@@ -212,3 +212,38 @@ async def run_demo_scan():
     traffic_service.clear()
     traffic_service.ingest(traffic)
     return execute_scan(spec, traffic)
+
+
+@router.get("/demo/files")
+async def get_demo_files():
+    """
+    Returns the demo OpenAPI specification text and traffic JSON for inspection,
+    auto-fill, or client download.
+    """
+    import json
+    return {
+        "spec_filename": "openapi.yaml",
+        "spec_content": DEMO_OPENAPI_SPEC,
+        "traffic_filename": "traffic.json",
+        "traffic_content": json.dumps(DEMO_TRAFFIC_REQUESTS, indent=2),
+    }
+
+
+@router.get("/demo/baseline", response_model=ScanResponse)
+async def get_baseline_scan():
+    """
+    Returns baseline scan for the declared OpenAPI specification
+    with standard traffic before shadow endpoints are introduced.
+    """
+    spec = OpenAPIParser.parse(DEMO_OPENAPI_SPEC)
+    baseline_traffic = [
+        TrafficRequest(**item)
+        for item in DEMO_TRAFFIC_REQUESTS
+        if "admin" not in item["path"]
+    ]
+    traffic_service.clear()
+    traffic_service.ingest(baseline_traffic)
+    return execute_scan(spec, baseline_traffic)
+
+
+

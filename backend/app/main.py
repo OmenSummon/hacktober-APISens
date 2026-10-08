@@ -63,6 +63,12 @@ async def root():
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Sanitizes unexpected exceptions to prevent internal stack trace leakage."""
+    origin = request.headers.get("origin")
+    headers = {}
+    if origin:
+        headers["Access-Control-Allow-Origin"] = origin
+        headers["Access-Control-Allow-Credentials"] = "true"
+        
     return JSONResponse(
         status_code=500,
         content={
@@ -70,4 +76,5 @@ async def global_exception_handler(request: Request, exc: Exception):
             "message": "An unexpected error occurred while processing the request.",
             "detail": str(exc),
         },
+        headers=headers,
     )
