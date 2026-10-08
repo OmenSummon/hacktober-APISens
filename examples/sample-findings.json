@@ -1,0 +1,81 @@
+{
+  "summary": {
+    "total_documented_endpoints": 5,
+    "total_observed_endpoints": 6,
+    "shadow_endpoints": 2,
+    "schema_drifts": 2,
+    "risk_score": 82,
+    "risk_level": "HIGH"
+  },
+  "findings": [
+    {
+      "id": "finding-shadow-get-admin-users",
+      "type": "SHADOW_ENDPOINT",
+      "severity": "HIGH",
+      "method": "GET",
+      "endpoint": "GET /admin/users",
+      "path": "/admin/users",
+      "title": "Undocumented Administrative Endpoint",
+      "description": "Endpoint was observed in API traffic but is absent from the OpenAPI specification.",
+      "observed_count": 1,
+      "risk_score": 85,
+      "details": {
+        "is_authenticated": false,
+        "owasp_category": "API9:2023 Improper Inventory Management",
+        "sample_query": {},
+        "impact": "Exposes administrative user listing without formal specification or security controls."
+      }
+    },
+    {
+      "id": "finding-shadow-get-debug",
+      "type": "SHADOW_ENDPOINT",
+      "severity": "HIGH",
+      "method": "GET",
+      "endpoint": "GET /debug",
+      "path": "/debug",
+      "title": "Undocumented Debug Endpoint",
+      "description": "Endpoint was observed in API traffic but is absent from the OpenAPI specification.",
+      "observed_count": 1,
+      "risk_score": 85,
+      "details": {
+        "is_authenticated": false,
+        "owasp_category": "API8:2023 Security Misconfiguration",
+        "sample_query": { "verbose": "1" },
+        "impact": "Debug endpoints in production often leak internal state, stack traces, and environment variables."
+      }
+    },
+    {
+      "id": "finding-drift-post-orders-coupon",
+      "type": "SCHEMA_DRIFT",
+      "severity": "MEDIUM",
+      "method": "POST",
+      "endpoint": "POST /orders",
+      "path": "/orders",
+      "title": "Undocumented Request Body Property: coupon",
+      "description": "Observed request payload includes field 'coupon' which is not defined in the OpenAPI schema properties.",
+      "observed_count": 1,
+      "risk_score": 50,
+      "details": {
+        "undocumented_field": "coupon",
+        "observed_value": "HACK2026_DISCOUNT",
+        "owasp_category": "API9:2023 Improper Inventory Management"
+      }
+    },
+    {
+      "id": "finding-drift-get-users-params",
+      "type": "PARAMETER_DRIFT",
+      "severity": "MEDIUM",
+      "method": "GET",
+      "endpoint": "GET /users",
+      "path": "/users",
+      "title": "Undocumented Query Parameters: role, show_deleted",
+      "description": "Observed requests passed query parameters not defined in the specification.",
+      "observed_count": 1,
+      "risk_score": 45,
+      "details": {
+        "undocumented_params": ["role", "show_deleted"],
+        "owasp_category": "API9:2023 Improper Inventory Management"
+      }
+    }
+  ]
+}

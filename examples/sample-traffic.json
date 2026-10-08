@@ -1,0 +1,84 @@
+{
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/users",
+      "query_params": {
+        "limit": 10
+      },
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      },
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:00:00Z"
+    },
+    {
+      "method": "GET",
+      "path": "/users/42",
+      "query_params": {},
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      },
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:01:15Z"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/users",
+      "query_params": {},
+      "headers": {
+        "User-Agent": "curl/8.1.2"
+      },
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:02:30Z"
+    },
+    {
+      "method": "GET",
+      "path": "/debug",
+      "query_params": {
+        "verbose": "1"
+      },
+      "headers": {
+        "User-Agent": "Internal-Agent/1.0"
+      },
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:03:00Z"
+    },
+    {
+      "method": "GET",
+      "path": "/products",
+      "query_params": {
+        "category": "electronics"
+      },
+      "headers": {},
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:03:45Z"
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+      },
+      "body": {
+        "item_id": "prod_9921",
+        "quantity": 2,
+        "shipping_address": "123 Main St, New York, NY",
+        "coupon": "HACK2026_DISCOUNT"
+      },
+      "status_code": 201,
+      "timestamp": "2026-10-08T10:04:12Z"
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "query_params": {
+        "role": "superadmin",
+        "show_deleted": "true"
+      },
+      "headers": {},
+      "status_code": 200,
+      "timestamp": "2026-10-08T10:05:00Z"
+    }
+  ]
+}
